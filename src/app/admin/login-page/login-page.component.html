@@ -30,12 +30,15 @@
         class="validation"
         *ngIf="form.get('password')?.touched && form.get('password')?.invalid"
       >
-        <small >
-          Enter Password
-        </small>
-        <small >
-       yyyyyy
-        </small>
+      <small *ngIf="form.get('password')?.errors?.['required']" >
+        Enter password
+      </small>
+      <small *ngIf="form.get('password')?.errors?.['minlength']" >
+        password must contain at least
+         {{form?.get('password')?.errors?.['minlength'].requiredLength}}
+         Now it is
+         {{form?.get('password')?.errors?.['minlength'].actualLength}} 
+      </small>
       </div>
     </div>
   
@@ -44,5 +47,5 @@
       class="btn btn-primary"
       [disabled]="form.invalid"
     >Enter</button>
-  </form>
+     </form>
   
