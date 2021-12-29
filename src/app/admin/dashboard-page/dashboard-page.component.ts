@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../shared/services/auth.servisre';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth : AuthService) { }
 
   ngOnInit(): void {
   }
-
+test(){
+  console.log(this.auth.token)
+}
 }
