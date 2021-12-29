@@ -8,11 +8,11 @@ import { AuthService } from '../shared/services/auth.servisre';
 })
 export class DashboardPageComponent implements OnInit {
 
-  constructor(private auth : AuthService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 test(){
-  console.log(this.auth.token)
+ 
 }
 }

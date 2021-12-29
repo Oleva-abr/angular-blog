@@ -8,7 +8,7 @@ import { Observable, take, tap } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  get token(): string |null {
+  get token(): string | null {
     // const expDate = new Date(localStorage.getItem('fb-token-exp'))
     //     if (new Date() > expDate) {
     //   this.logout()
@@ -22,8 +22,8 @@ export class AuthService {
     user.returnSecureToken = true
     return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
       .pipe(
-        tap(()=>this.setToken)
-        )
+        tap((response)=>this.setToken(response as FbAuthResponse))
+      )
   }
 
   logout(): void {
@@ -34,7 +34,7 @@ export class AuthService {
     return !!this.token
   }
 
-  private setToken(response: FbAuthResponse | null ) {
+  private setToken(response: FbAuthResponse | null  ) {
     if (response) {
       const expDate = new Date(new Date().getTime() + Number(response.expiresIn) * 1000)
       localStorage.setItem('fb-token', response.idToken)
