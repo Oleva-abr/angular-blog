@@ -9,11 +9,11 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   get token(): string | null {
-    // const expDate = new Date(localStorage.getItem('fb-token-exp'))
-    //     if (new Date() > expDate) {
-    //   this.logout()
-    //   return null
-    // }
+    const expDate = localStorage.getItem('fb-token-exp')
+        if (new Date() > new Date(expDate as string)) {
+      this.logout()
+      return null
+    }
   
     return localStorage.getItem('fb-token')
   }
