@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from '../shared/components/admin-layaut/interfaces';
+import { User } from '../shared/interfaces';
+
 import { AuthService } from '../shared/services/auth.servisre';
 
 @Component({

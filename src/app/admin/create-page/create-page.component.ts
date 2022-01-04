@@ -1,6 +1,8 @@
+import { PostService } from './../shared/services/post.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { Post } from '../shared/components/admin-layaut/interfaces';
+import { Post } from '../shared/interfaces';
+
 
 @Component({
   selector: 'app-create-page',
@@ -9,7 +11,7 @@ import { Post } from '../shared/components/admin-layaut/interfaces';
 })
 export class CreatePageComponent implements OnInit {
   form!: FormGroup;
-  constructor() { }
+  constructor( private postService:PostService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -29,5 +31,9 @@ export class CreatePageComponent implements OnInit {
      date: new Date()
 
    } 
+   this.postService.create(post).subscribe(()=>{
+     this.form.reset()
+   })
+   
   }
 }

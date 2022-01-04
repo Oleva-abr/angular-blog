@@ -1,8 +1,9 @@
 import { environment } from './../../../../environments/environment';
-import { User, FbAuthResponse } from './../components/admin-layaut/interfaces';
+
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { catchError, Observable, Subject, tap, throwError } from 'rxjs';
+import { FbAuthResponse, User } from '../interfaces';
 
 @Injectable()
 export class AuthService {
