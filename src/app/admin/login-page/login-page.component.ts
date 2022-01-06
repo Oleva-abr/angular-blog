@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { User } from '../shared/interfaces';
 
 import { AuthService } from '../shared/services/auth.servisre';
@@ -13,14 +13,24 @@ import { AuthService } from '../shared/services/auth.servisre';
 export class LoginPageComponent implements OnInit {
 
   form!: FormGroup;
-  submitted=false
+  submitted=false;
+  message: string | undefined
+
   constructor(
     public auth: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params['loginAgain']) {
+        this.message = 'Please enter data '
+      } else if (params['authFailed']) {
+        this.message = 'The session has expired. Re-enter the data'
+      }
+    })
     this.form = new FormGroup({
       email: new FormControl(null, [
         Validators.required,
@@ -37,15 +47,18 @@ export class LoginPageComponent implements OnInit {
       return
     }
     this.submitted=true
+    
     const user: User = {
       email: this.form.value.email,
       password: this.form.value.password,
     
     }
-    this.auth.login(user).subscribe(()=>{
+    this.auth.login(user).subscribe(() => {
       this.form.reset()
       this.router.navigate(['/admin', 'dashboard'])
-      this.submitted=false
+      this.submitted = false
+    }, () => {
+      this.submitted = false
     })
   }
 }

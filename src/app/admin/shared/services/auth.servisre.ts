@@ -5,8 +5,8 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { catchError, Observable, Subject, tap, throwError } from 'rxjs';
 import { FbAuthResponse, User } from '../interfaces';
 
-@Injectable()
-export class AuthService {
+@Injectable({providedIn:'root'})
+export class AuthService  {
   public error$: Subject<string> = new Subject<string>()
   constructor(private http: HttpClient) {}
 
