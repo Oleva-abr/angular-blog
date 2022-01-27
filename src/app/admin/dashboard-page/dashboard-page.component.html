@@ -1,3 +1,4 @@
+<div *ngIf="posts.length; else loading"> 
 <table>
     <thead>
         <tr >
@@ -14,8 +15,13 @@
             <td>{{post.author}}</td>
             <td>{{post.title}}</td>
             <td>{{post.date | date:'medium'}}</td>
+            <button class="btn btn-link open" [routerLink]="['/admin', 'post', post.id,'edit']" > Open post</button> 
+                <a (click)="remove(post.id)"> Delete</a>
         </tr>
-        <!-- <button class="btn btn-link" [routerLink]="['/admin', 'post', post.id, 'edit']" > Open post</button> -->
-        <!-- <a (click)='remove(post.id)'> Delete</a> -->
-    </tbody>
+          </tbody>
 </table>
+</div>
+
+<ng-template #loading>
+    <p class="text-center">Loading...</p>
+</ng-template>
