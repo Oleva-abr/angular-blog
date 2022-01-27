@@ -10,14 +10,16 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { CreatePageComponent } from './create-page/create-page.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { SharedModule } from './shared/shared.module';
+import { SearchPipe } from './shared/search.pipe';
 
 @NgModule({
-    declarations: [AdminLayautComponent, LoginPageComponent, DashboardPageComponent, CreatePageComponent, EditPageComponent],
+    declarations: [AdminLayautComponent, LoginPageComponent, DashboardPageComponent, CreatePageComponent, EditPageComponent, SearchPipe],
     imports:[
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
         SharedModule,
+       
         RouterModule.forChild([
             {path:'',component:AdminLayautComponent, children:[
                 {path:'', redirectTo:'/admin/login', pathMatch:'full'},
